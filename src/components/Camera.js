@@ -1,13 +1,13 @@
 import React, { useRef, useEffect } from "react"
-import * as tf from "@tensorflow/tfjs-core"
+import "@tensorflow/tfjs-core"
 import "@tensorflow/tfjs-backend-webgl"
 import "@tensorflow/tfjs-backend-wasm"
 import * as poseDetection from "@tensorflow-models/pose-detection"
 import Webcam from "react-webcam"
 
 const videoDim = {
-    width: 640,
-    height: 480
+    width: 1280,
+    height: 720
 }
 
 let rafId
@@ -55,6 +55,9 @@ export default function Camera() {
     async function renderPrediction() {
         await renderResult()
         rafId = requestAnimationFrame(renderPrediction)
+        if (rafId) {
+            console.log("using rafId");
+        }
     }
 
     async function run() {
@@ -65,15 +68,18 @@ export default function Camera() {
 
     useEffect(() => {
         run()
-    }, [webcamRef])
+    }, [webcamRef, run])
 
     return (
         <div style={{ position: 'relative' }}>
             <Webcam
                 ref={webcamRef}
                 style={{
+                    position: 'absolute',
                     width: videoDim.width,
                     height: videoDim.height,
+                    left: 0,
+                    top: 0,
                 }}
             />
             <canvas
