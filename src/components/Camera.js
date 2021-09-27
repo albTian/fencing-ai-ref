@@ -60,15 +60,15 @@ export default function Camera() {
         }
     }
 
+    async function run() {
+        setupCamera()
+        await setupDetector()
+        renderPrediction()
+    }
 
     useEffect(() => {
-        async function run() {
-            setupCamera()
-            await setupDetector()
-            renderPrediction()
-        }
         run()
-    }, [webcamRef])
+    })
 
     return (
         <div style={{ position: 'relative' }}>
