@@ -68,7 +68,7 @@ export default function Camera() {
 
     useEffect(() => {
         run()
-    }, [webcamRef, run])
+    }, [])
 
     return (
         <div style={{ position: 'relative' }}>
