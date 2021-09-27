@@ -60,13 +60,13 @@ export default function Camera() {
         }
     }
 
-    const run = async () => {
-        setupCamera()
-        await setupDetector()
-        renderPrediction()
-    }
 
     useEffect(() => {
+        async function run() {
+            setupCamera()
+            await setupDetector()
+            renderPrediction()
+        }
         run()
     }, [webcamRef])
 
