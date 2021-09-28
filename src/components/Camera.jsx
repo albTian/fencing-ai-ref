@@ -4,6 +4,7 @@ import "@tensorflow/tfjs-backend-webgl"
 import "@tensorflow/tfjs-backend-wasm"
 import * as poseDetection from "@tensorflow-models/pose-detection"
 import Webcam from "react-webcam"
+import { drawResults } from "../utils/drawUtils"
 
 const videoDim = {
     width: 1280,
@@ -45,18 +46,27 @@ export default function Camera() {
         camera.video.height = videoHeight
 
         const poses = await detector.estimatePoses(video)
-        console.log(poses);
+        drawCanvas(poses, videoWidth, videoHeight, canvasRef)
+    }
+    
+    function drawCanvas(poses, videoWidth, videoHeight, canvas) {
+        const ctx = canvas.current.getContext('2d')
+        canvas.current.videoWidth = videoWidth
+        canvas.current.videoHeight = videoHeight
+        
+        drawResults(poses, ctx, 0)
     }
 
     async function renderResult() {
-        await detect(detector)
+        if (!detector) return
+        const poses = await detect(detector)
+
     }
 
     async function renderPrediction() {
         await renderResult()
         rafId = requestAnimationFrame(renderPrediction)
         if (rafId) {
-            console.log("using rafId");
         }
     }
 
@@ -69,6 +79,8 @@ export default function Camera() {
     useEffect(() => {
         run()
     })
+
+    
 
     return (
         <div style={{ position: 'relative' }}>
