@@ -74,6 +74,7 @@ export default function Camera() {
         <div style={{ position: 'relative' }}>
             <Webcam
                 ref={webcamRef}
+                mirrored
                 style={{
                     position: 'absolute',
                     width: videoDim.width,
