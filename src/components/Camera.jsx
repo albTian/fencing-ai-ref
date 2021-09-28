@@ -59,7 +59,7 @@ export default function Camera() {
 
     async function renderResult() {
         if (!detector) return
-        const poses = await detect(detector)
+        await detect(detector)
 
     }
 
