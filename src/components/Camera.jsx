@@ -21,7 +21,7 @@ export default function Camera() {
 
   function setupCamera() {
     camera = webcamRef.current;
-    
+
     // eslint-disable-next-line
     ctx = canvasRef.current.getContext("2d");
   }
@@ -91,6 +91,8 @@ export default function Camera() {
       <Webcam
         ref={webcamRef}
         mirrored
+        width={videoDim.width}
+        height={videoDim.height}
         style={{
           position: "absolute",
           width: videoDim.width,
@@ -101,6 +103,8 @@ export default function Camera() {
       />
       <canvas
         ref={canvasRef}
+        width={videoDim.width}
+        height={videoDim.height}
         style={{
           position: "absolute",
           width: videoDim.width,
