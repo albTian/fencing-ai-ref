@@ -4,7 +4,7 @@ import "@tensorflow/tfjs-backend-webgl";
 import "@tensorflow/tfjs-backend-wasm";
 import * as poseDetection from "@tensorflow-models/pose-detection";
 import Webcam from "react-webcam";
-import { drawResults } from "../utils/drawUtils";
+import DrawUtil from "../utils/drawUtils";
 
 const videoConstraints = {
   width: 1280,
@@ -12,9 +12,12 @@ const videoConstraints = {
   facingMode: "environment",
 };
 
+const MIN_SCORE = 0.25;
+
 let rafId;
 let webcam, detector;
 let canvas, ctx;
+let drawer;
 
 export default function Camera() {
   const webcamRef = useRef(null);
@@ -22,7 +25,6 @@ export default function Camera() {
 
   useEffect(() => {
     run();
-
     // eslint-disable-next-line
   }, []);
 
@@ -41,13 +43,15 @@ export default function Camera() {
     ctx = canvas.getContext("2d");
     ctx.translate(videoConstraints.width, 0);
     ctx.scale(-1, 1);
+
+    drawer = new DrawUtil(ctx, MIN_SCORE);
   }
 
   async function setupDetector() {
     const model = poseDetection.SupportedModels.MoveNet;
     const detectorConfig = {
       modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
-      minPoseScore: 0.2,
+      minPoseScore: MIN_SCORE,
       enableTracking: true,
     };
     detector = await poseDetection.createDetector(model, detectorConfig);
@@ -83,7 +87,8 @@ export default function Camera() {
       videoConstraints.width,
       videoConstraints.height
     );
-    drawResults(poses, ctx, 0.2);
+    // drawResults(poses, ctx, MIN_SCORE);
+    drawer.drawResults(poses, ctx, MIN_SCORE);
   }
 
   return (
