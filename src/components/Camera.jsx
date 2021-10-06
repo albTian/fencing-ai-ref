@@ -7,8 +7,8 @@ import Webcam from "react-webcam";
 import { drawResults } from "../utils/drawUtils";
 
 const videoDim = {
-  width: 1280,
-  height: 720,
+  width: 640,
+  height: 380,
 };
 
 let rafId;
@@ -49,7 +49,6 @@ export default function Camera() {
     camera.video.height = videoHeight;
 
     const poses = await detector.estimatePoses(video);
-    console.log("found poses:");
     console.log(poses);
     drawCanvas(poses, videoWidth, videoHeight, canvasRef);
   }
@@ -59,7 +58,7 @@ export default function Camera() {
     canvas.current.videoWidth = videoWidth;
     canvas.current.videoHeight = videoHeight;
 
-    ctx.drawImage(camera.video, 0, 0, videoDim.width, videoDim.height);
+    ctx.drawImage(camera.video, 0, 0, videoWidth, videoHeight);
     drawResults(poses, ctx, 0);
   }
 
@@ -119,13 +118,13 @@ export default function Camera() {
   return (
     <div style={{ position: "relative˝" }}>
       <canvas
-        id="output"
+        // id="output"
         ref={canvasRef}
         width={videoDim.width}
         height={videoDim.height}
       />
       <Webcam
-        id="video"
+        // id="video"
         ref={webcamRef}
         playsInline
         style={{
