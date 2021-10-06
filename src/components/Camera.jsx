@@ -59,6 +59,7 @@ export default function Camera() {
     canvas.current.videoWidth = videoWidth;
     canvas.current.videoHeight = videoHeight;
 
+    ctx.drawImage(camera.video, 0, 0, videoDim.width, videoDim.height);
     drawResults(poses, ctx, 0);
   }
 
@@ -86,31 +87,53 @@ export default function Camera() {
     console.log("DONE LOADING.");
   });
 
+  // return (
+  //   <div style={{ position: "relative" }}>
+  //     <Webcam
+  //       ref={webcamRef}
+  //       mirrored
+  //       width={videoDim.width}
+  //       height={videoDim.height}
+  //       style={{
+  //         position: "absolute",
+  //         width: videoDim.width,
+  //         height: videoDim.height,
+  //         left: 0,
+  //         top: 0,
+  //       }}
+  //     />
+  //     <canvas
+  //       ref={canvasRef}
+  //       width={videoDim.width}
+  //       height={videoDim.height}
+  //       style={{
+  //         position: "absolute",
+  //         width: videoDim.width,
+  //         height: videoDim.height,
+  //         left: 0,
+  //         top: 0,
+  //       }}
+  //     />
+  //   </div>
+  // );
   return (
-    <div style={{ position: "relative" }}>
-      <Webcam
-        ref={webcamRef}
-        mirrored
-        width={videoDim.width}
-        height={videoDim.height}
-        style={{
-          position: "absolute",
-          width: videoDim.width,
-          height: videoDim.height,
-          left: 0,
-          top: 0,
-        }}
-      />
+    <div style={{ position: "relative˝" }}>
       <canvas
+        id="output"
         ref={canvasRef}
         width={videoDim.width}
         height={videoDim.height}
+      />
+      <Webcam
+        id="video"
+        ref={webcamRef}
+        playsInline
         style={{
-          position: "absolute",
-          width: videoDim.width,
-          height: videoDim.height,
-          left: 0,
-          top: 0,
+          WebkitTransform: "scaleX(-1)",
+          transform: "scaleX(-1)",
+          visibility: "hidden",
+          width: "auto",
+          height: "auto",
         }}
       />
     </div>
