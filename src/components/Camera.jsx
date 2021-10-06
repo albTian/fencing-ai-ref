@@ -93,9 +93,6 @@ export default function Camera() {
         position: "relative",
         maxHeight: "100vh",
         overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        alignContent: "center",
       }}
     >
       <canvas
