@@ -73,7 +73,7 @@ export default function Camera() {
     if (rafId)
 
     // Grab the poses from detector
-    const poses = await detect(detector);
+    var poses = await detect(detector);
 
     // Draw webcam video and poses onto canvas
     ctx.drawImage(
