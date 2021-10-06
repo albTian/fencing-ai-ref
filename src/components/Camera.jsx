@@ -7,9 +7,14 @@ import Webcam from "react-webcam";
 import { drawResults } from "../utils/drawUtils";
 
 const videoDim = {
-  width: 960,
+  width: 1280,
   height: 720,
 };
+
+const videoConstraints = {
+  width: 1280,
+  height: 720,
+}
 
 let rafId;
 let webcam, detector;
@@ -96,13 +101,13 @@ export default function Camera() {
         ref={canvasRef}
         width={videoDim.width}
         height={videoDim.height}
-        
       />
       <Webcam
         ref={webcamRef}
         playsInline
         width={videoDim.width}
         height={videoDim.height}
+        videoConstraints={videoConstraints}
         style={{
           visibility: "hidden"
         }}
