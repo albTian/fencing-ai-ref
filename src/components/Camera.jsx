@@ -71,9 +71,8 @@ export default function Camera() {
     if (!detector) return;
     // To get vercel to shut up
     if (rafId)
-
-    // Grab the poses from detector
-    var poses = await detect(detector);
+      // Grab the poses from detector
+      var poses = await detect(detector);
 
     // Draw webcam video and poses onto canvas
     ctx.drawImage(
@@ -88,10 +87,15 @@ export default function Camera() {
     rafId = requestAnimationFrame(renderPrediction);
   }
 
-
   return (
     <div
-      style={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}
+      style={{
+        position: "relative",
+        maxHeight: "100vh",
+        overflow: "hidden",
+        display: "flex",
+        alignContent: "center",
+      }}
     >
       <canvas
         ref={canvasRef}
