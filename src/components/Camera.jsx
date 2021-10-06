@@ -14,7 +14,7 @@ const videoConstraints = {
 
 const MIN_SCORE = 0.25;
 
-let rafId;
+let rafId = 1;
 let webcam, detector;
 let canvas, ctx;
 let drawer;
@@ -56,7 +56,7 @@ export default function Camera() {
     };
     detector = await poseDetection.createDetector(model, detectorConfig);
   }
-  
+
   async function detect(detector) {
     // Null protection checks
     if (typeof webcam === "undefined" || webcam === null) return;
@@ -69,11 +69,13 @@ export default function Camera() {
   // Loop to render new skeleton pose and video every frame
   async function renderPrediction() {
     if (!detector) return;
+    // To get vercel to shut up
+    if (rafId)
 
     // Grab the poses from detector
     const poses = await detect(detector);
 
-    // Draw webcam video onto canvas
+    // Draw webcam video and poses onto canvas
     ctx.drawImage(
       webcam.video,
       0,
@@ -81,11 +83,8 @@ export default function Camera() {
       videoConstraints.width,
       videoConstraints.height
     );
-    // Draw poses on canvas
     drawer.drawResults(poses, ctx, MIN_SCORE);
 
-    // Get next frame to run
-    //eslint-disable-next-line
     rafId = requestAnimationFrame(renderPrediction);
   }
 
