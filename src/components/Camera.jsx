@@ -21,6 +21,8 @@ export default function Camera() {
 
   function setupCamera() {
     camera = webcamRef.current;
+    
+    // eslint-disable-next-line
     ctx = canvasRef.current.getContext("2d");
   }
 
