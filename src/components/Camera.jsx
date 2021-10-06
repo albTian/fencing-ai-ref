@@ -28,7 +28,13 @@ export default function Camera() {
     camera.video.width = videoWidth;
     camera.video.height = videoHeight;
 
+    // canvas.width = videoWidth
+    // canvas.height = videoHeight
     ctx = canvasRef.current.getContext("2d");
+    console.log("ctx");
+    console.log(ctx);
+    ctx.translate(videoDim.width, 0)
+    ctx.scale(-1, 1)
   }
 
   async function setupDetector() {
