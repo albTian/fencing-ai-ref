@@ -6,15 +6,11 @@ import * as poseDetection from "@tensorflow-models/pose-detection";
 import Webcam from "react-webcam";
 import { drawResults } from "../utils/drawUtils";
 
-const videoDim = {
-  width: 1280,
-  height: 720,
-};
-
 const videoConstraints = {
   width: 1280,
   height: 720,
-}
+  facingMode: "environment",
+};
 
 let rafId;
 let webcam, detector;
@@ -25,44 +21,32 @@ export default function Camera() {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    console.log("LOADING ...");
     run();
-    console.log("DONE LOADING.");
-  });
-  
+
+    // eslint-disable-next-line
+  }, []);
+
   async function run() {
+    console.log("loading...");
     setupCamera();
     await setupDetector();
-    renderPrediction();
+    await renderPrediction();
   }
 
   function setupCamera() {
     webcam = webcamRef.current;
-    webcam.width = videoDim.width
-    webcam.height = videoDim.height
-    console.log('webcam');
-    console.log(webcam);
-    
-    canvas = canvasRef.current
-    canvas.width = videoDim.width
-    canvas.height = videoDim.height
-    console.log('canvas');
-    console.log(canvas);
-    
+
+    canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
-    ctx.width = videoDim.width
-    ctx.height = videoDim.height
-    ctx.translate(videoDim.width, 0)
-    ctx.scale(-1, 1)
-    console.log('ctx');
-    console.log(ctx);
+    ctx.translate(videoConstraints.width, 0);
+    ctx.scale(-1, 1);
   }
 
   async function setupDetector() {
     const model = poseDetection.SupportedModels.MoveNet;
     const detectorConfig = {
       modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
-      minPoseScore: 0.3,
+      minPoseScore: 0.2,
       enableTracking: true,
     };
     detector = await poseDetection.createDetector(model, detectorConfig);
@@ -79,7 +63,7 @@ export default function Camera() {
   async function renderResult() {
     if (!detector) return;
     const poses = await detect(detector);
-    drawCanvas(poses)
+    drawCanvas(poses);
   }
 
   async function detect(detector) {
@@ -91,25 +75,31 @@ export default function Camera() {
   }
 
   function drawCanvas(poses) {
-    ctx.drawImage(webcam.video, 0, 0, videoDim.width, videoDim.height);
-    drawResults(poses, ctx, 0.3);
+    ctx.drawImage(
+      webcam.video,
+      0,
+      0,
+      videoConstraints.width,
+      videoConstraints.height
+    );
+    drawResults(poses, ctx, 0.2);
   }
 
   return (
     <div style={{ position: "relative˝" }}>
       <canvas
         ref={canvasRef}
-        width={videoDim.width}
-        height={videoDim.height}
+        width={videoConstraints.width}
+        height={videoConstraints.height}
       />
       <Webcam
         ref={webcamRef}
         playsInline
-        width={videoDim.width}
-        height={videoDim.height}
+        width={videoConstraints.width}
+        height={videoConstraints.height}
         videoConstraints={videoConstraints}
         style={{
-          visibility: "hidden"
+          visibility: "hidden",
         }}
       />
     </div>
