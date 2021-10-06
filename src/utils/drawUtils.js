@@ -57,7 +57,7 @@ function drawKeypoint(keypoint, ctx, scoreThreshold) {
 
     if (score >= minScore) {
         const circle = new Path2D();
-        circle.arc(keypoint.x, keypoint.y, 2, 0, 2 * Math.PI);
+        circle.arc(keypoint.x, keypoint.y, 3, 0, 2 * Math.PI);
         ctx.fill(circle);
         ctx.stroke(circle);
     }

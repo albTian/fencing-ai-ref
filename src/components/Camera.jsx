@@ -62,7 +62,7 @@ export default function Camera() {
     const model = poseDetection.SupportedModels.MoveNet;
     const detectorConfig = {
       modelType: poseDetection.movenet.modelType.MULTIPOSE_LIGHTNING,
-      minPoseScore: 0.2,
+      minPoseScore: 0.3,
       enableTracking: true,
     };
     detector = await poseDetection.createDetector(model, detectorConfig);
@@ -92,7 +92,7 @@ export default function Camera() {
 
   function drawCanvas(poses) {
     ctx.drawImage(webcam.video, 0, 0, videoDim.width, videoDim.height);
-    drawResults(poses, ctx, 0);
+    drawResults(poses, ctx, 0.3);
   }
 
   return (
