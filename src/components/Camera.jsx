@@ -21,8 +21,13 @@ export default function Camera() {
 
   function setupCamera() {
     camera = webcamRef.current;
+    const video = camera.video;
+    const videoWidth = video.videoWidth;
+    const videoHeight = video.videoHeight;
+  
+    camera.video.width = videoWidth;
+    camera.video.height = videoHeight;
 
-    // eslint-disable-next-line
     ctx = canvasRef.current.getContext("2d");
   }
 
@@ -41,32 +46,21 @@ export default function Camera() {
     if (camera.video.readyState !== 4) return;
     if (!detector) return;
 
-    const video = camera.video;
-    const videoWidth = video.videoWidth;
-    const videoHeight = video.videoHeight;
-
-    camera.video.width = videoWidth;
-    camera.video.height = videoHeight;
-
-    const poses = await detector.estimatePoses(video);
-    console.log(poses);
-    drawCanvas(poses, videoWidth, videoHeight, canvasRef);
+    return await detector.estimatePoses(camera.video);
   }
 
-  function drawCanvas(poses, videoWidth, videoHeight, canvas) {
-    const ctx = canvas.current.getContext("2d");
-    canvas.current.videoWidth = videoWidth;
-    canvas.current.videoHeight = videoHeight;
-
+  function drawCanvas(poses, videoWidth, videoHeight) {
     ctx.drawImage(camera.video, 0, 0, videoWidth, videoHeight);
     drawResults(poses, ctx, 0);
   }
 
   async function renderResult() {
     if (!detector) return;
-    await detect(detector);
+    const poses = await detect(detector);
+    drawCanvas(poses, camera.video.videoWidth, camera.video.videoHeight)
   }
 
+  // Loop to render new skeleton pose and video every frame
   async function renderPrediction() {
     await renderResult();
     rafId = requestAnimationFrame(renderPrediction);
@@ -85,36 +79,6 @@ export default function Camera() {
     run();
     console.log("DONE LOADING.");
   });
-
-  // return (
-  //   <div style={{ position: "relative" }}>
-  //     <Webcam
-  //       ref={webcamRef}
-  //       mirrored
-  //       width={videoDim.width}
-  //       height={videoDim.height}
-  //       style={{
-  //         position: "absolute",
-  //         width: videoDim.width,
-  //         height: videoDim.height,
-  //         left: 0,
-  //         top: 0,
-  //       }}
-  //     />
-  //     <canvas
-  //       ref={canvasRef}
-  //       width={videoDim.width}
-  //       height={videoDim.height}
-  //       style={{
-  //         position: "absolute",
-  //         width: videoDim.width,
-  //         height: videoDim.height,
-  //         left: 0,
-  //         top: 0,
-  //       }}
-  //     />
-  //   </div>
-  // );
   return (
     <div style={{ position: "relative˝" }}>
       <canvas

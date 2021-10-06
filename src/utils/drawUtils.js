@@ -7,7 +7,7 @@ import * as poseDetection from '@tensorflow-models/pose-detection'
  * @param scoreThreshold The minimum score needed
  */
 function drawResults(poses, ctx, scoreThreshold) {
-    if (!poses) return
+    if (!poses || !ctx) return
     for (const pose of poses) {
         drawResult(pose, ctx, scoreThreshold);
     }
