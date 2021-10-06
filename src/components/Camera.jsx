@@ -31,6 +31,7 @@ export default function Camera() {
     setupCamera();
     await setupDetector();
     await renderPrediction();
+    console.log("done loading");
   }
 
   function setupCamera() {
@@ -86,7 +87,9 @@ export default function Camera() {
   }
 
   return (
-    <div style={{ position: "relative˝" }}>
+    <div
+      style={{ position: "relative", maxHeight: "100vh", overflow: "hidden" }}
+    >
       <canvas
         ref={canvasRef}
         width={videoConstraints.width}
