@@ -7,34 +7,50 @@ import Webcam from "react-webcam";
 import { drawResults } from "../utils/drawUtils";
 
 const videoDim = {
-  width: 640,
-  height: 380,
+  width: 960,
+  height: 720,
 };
 
 let rafId;
-let camera, detector;
-let ctx;
+let webcam, detector;
+let canvas, ctx;
 
 export default function Camera() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
 
-  function setupCamera() {
-    camera = webcamRef.current;
-    const video = camera.video;
-    const videoWidth = video.videoWidth;
-    const videoHeight = video.videoHeight;
+  useEffect(() => {
+    console.log("LOADING ...");
+    run();
+    console.log("DONE LOADING.");
+  });
   
-    camera.video.width = videoWidth;
-    camera.video.height = videoHeight;
+  async function run() {
+    setupCamera();
+    await setupDetector();
+    renderPrediction();
+  }
 
-    // canvas.width = videoWidth
-    // canvas.height = videoHeight
-    ctx = canvasRef.current.getContext("2d");
-    console.log("ctx");
-    console.log(ctx);
+  function setupCamera() {
+    webcam = webcamRef.current;
+    webcam.width = videoDim.width
+    webcam.height = videoDim.height
+    console.log('webcam');
+    console.log(webcam);
+    
+    canvas = canvasRef.current
+    canvas.width = videoDim.width
+    canvas.height = videoDim.height
+    console.log('canvas');
+    console.log(canvas);
+    
+    ctx = canvas.getContext("2d");
+    ctx.width = videoDim.width
+    ctx.height = videoDim.height
     ctx.translate(videoDim.width, 0)
     ctx.scale(-1, 1)
+    console.log('ctx');
+    console.log(ctx);
   }
 
   async function setupDetector() {
@@ -47,25 +63,6 @@ export default function Camera() {
     detector = await poseDetection.createDetector(model, detectorConfig);
   }
 
-  async function detect(detector) {
-    if (typeof camera === "undefined" || camera === null) return;
-    if (camera.video.readyState !== 4) return;
-    if (!detector) return;
-
-    return await detector.estimatePoses(camera.video);
-  }
-
-  function drawCanvas(poses, videoWidth, videoHeight) {
-    ctx.drawImage(camera.video, 0, 0, videoWidth, videoHeight);
-    drawResults(poses, ctx, 0);
-  }
-
-  async function renderResult() {
-    if (!detector) return;
-    const poses = await detect(detector);
-    drawCanvas(poses, camera.video.videoWidth, camera.video.videoHeight)
-  }
-
   // Loop to render new skeleton pose and video every frame
   async function renderPrediction() {
     await renderResult();
@@ -74,35 +71,40 @@ export default function Camera() {
     }
   }
 
-  async function run() {
-    setupCamera();
-    await setupDetector();
-    renderPrediction();
+  async function renderResult() {
+    if (!detector) return;
+    const poses = await detect(detector);
+    drawCanvas(poses)
   }
 
-  useEffect(() => {
-    console.log("LOADING ...");
-    run();
-    console.log("DONE LOADING.");
-  });
+  async function detect(detector) {
+    if (typeof webcam === "undefined" || webcam === null) return;
+    if (webcam.video.readyState !== 4) return;
+    if (!detector) return;
+
+    return await detector.estimatePoses(webcam.video);
+  }
+
+  function drawCanvas(poses) {
+    ctx.drawImage(webcam.video, 0, 0, videoDim.width, videoDim.height);
+    drawResults(poses, ctx, 0);
+  }
+
   return (
     <div style={{ position: "relative˝" }}>
       <canvas
-        // id="output"
         ref={canvasRef}
         width={videoDim.width}
         height={videoDim.height}
+        
       />
       <Webcam
-        // id="video"
         ref={webcamRef}
         playsInline
+        width={videoDim.width}
+        height={videoDim.height}
         style={{
-          WebkitTransform: "scaleX(-1)",
-          transform: "scaleX(-1)",
-          visibility: "hidden",
-          width: "auto",
-          height: "auto",
+          visibility: "hidden"
         }}
       />
     </div>
