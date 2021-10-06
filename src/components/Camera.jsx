@@ -30,13 +30,13 @@ export default function Camera() {
 
   async function run() {
     console.log("loading...");
-    setupCamera();
+    setup();
     await setupDetector();
     await renderPrediction();
     console.log("done loading");
   }
 
-  function setupCamera() {
+  function setup() {
     webcam = webcamRef.current;
 
     canvas = canvasRef.current;
@@ -56,22 +56,9 @@ export default function Camera() {
     };
     detector = await poseDetection.createDetector(model, detectorConfig);
   }
-
-  // Loop to render new skeleton pose and video every frame
-  async function renderPrediction() {
-    await renderResult();
-    rafId = requestAnimationFrame(renderPrediction);
-    if (rafId) {
-    }
-  }
-
-  async function renderResult() {
-    if (!detector) return;
-    const poses = await detect(detector);
-    drawCanvas(poses);
-  }
-
+  
   async function detect(detector) {
+    // Null protection checks
     if (typeof webcam === "undefined" || webcam === null) return;
     if (webcam.video.readyState !== 4) return;
     if (!detector) return;
@@ -79,7 +66,14 @@ export default function Camera() {
     return await detector.estimatePoses(webcam.video);
   }
 
-  function drawCanvas(poses) {
+  // Loop to render new skeleton pose and video every frame
+  async function renderPrediction() {
+    if (!detector) return;
+
+    // Grab the poses from detector
+    const poses = await detect(detector);
+
+    // Draw webcam video onto canvas
     ctx.drawImage(
       webcam.video,
       0,
@@ -87,9 +81,14 @@ export default function Camera() {
       videoConstraints.width,
       videoConstraints.height
     );
-    // drawResults(poses, ctx, MIN_SCORE);
+    // Draw poses on canvas
     drawer.drawResults(poses, ctx, MIN_SCORE);
+
+    // Get next frame to run
+    //eslint-disable-next-line
+    rafId = requestAnimationFrame(renderPrediction);
   }
+
 
   return (
     <div

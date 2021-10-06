@@ -6,6 +6,9 @@ const COLOR_PALETTE = [
     '#ffe119', '#911eb4', '#bfef45', '#f032e6', '#3cb44b', '#a9a9a9'
 ];
 
+const LINE_WIDTH = 2
+const CIRCLE_RADIUS = 4
+
 // What are we prop drilling?
 // ctx, scoreThreshold
 
@@ -14,8 +17,6 @@ class DrawUtil {
         this.ctx = ctx
         this.scoreThreshold = scoreThreshold
     }
-
-
 
     /**
      * Draw the keypoints and skeleton on the video.
@@ -50,7 +51,7 @@ class DrawUtil {
         this.ctx.strokeStyle = poseId != null ?
             COLOR_PALETTE[poseId % 20] :
             'White';;
-        this.ctx.lineWidth = 2;
+        this.ctx.lineWidth = LINE_WIDTH;
 
         for (const i of keypointInd.middle) {
             this.drawKeypoint(keypoints[i]);
@@ -73,7 +74,7 @@ class DrawUtil {
 
         if (score >= this.scoreThreshold) {
             const circle = new Path2D();
-            circle.arc(keypoint.x, keypoint.y, 4, 0, 2 * Math.PI);
+            circle.arc(keypoint.x, keypoint.y, CIRCLE_RADIUS, 0, 2 * Math.PI);
             this.ctx.fill(circle);
             this.ctx.stroke(circle);
         }
@@ -91,7 +92,7 @@ class DrawUtil {
             'White';
         this.ctx.fillStyle = color;
         this.ctx.strokeStyle = color;
-        this.ctx.lineWidth = 2;
+        this.ctx.lineWidth = LINE_WIDTH;
 
         poseDetection.util.getAdjacentPairs(poseDetection.SupportedModels.MoveNet).forEach(([
             i, j
