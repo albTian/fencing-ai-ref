@@ -25,7 +25,7 @@ Although fencing AI is purely a passion project at the moment, there are some ba
    2. **Accessibility** Being browser based means that eventually a single codebase can serve any laptop with a webcam or smartphone with a camera. Which means if people want to try for themselves, they don't need to go out and buy a sensor kit or even download anything, just simply go to wherever it's hosted at the time.
    3. **Maintainability** The web is superior in maintainability IMO ince you only need to maintain one codebase forever. Some config changes may be necessary for different screen sizes or devices but those pale in comparrison to other alternatives. Also truth be told I'm just most accustomed to coding web apps which makes the learing curve so much easier. 
 
-## Getting started
+## Getting started (FOR DEVELOPERS)
 
 In the project directory, you can run:
 
