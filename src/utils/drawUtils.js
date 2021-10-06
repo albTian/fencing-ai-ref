@@ -7,8 +7,6 @@ import * as poseDetection from '@tensorflow-models/pose-detection'
  * @param scoreThreshold The minimum score needed
  */
 function drawResults(poses, ctx, scoreThreshold) {
-    console.log("drawing")
-    console.log(poses)
     if (!poses) return
     for (const pose of poses) {
         drawResult(pose, ctx, scoreThreshold);
@@ -62,7 +60,6 @@ function drawKeypoint(keypoint, ctx, scoreThreshold) {
         circle.arc(keypoint.x, keypoint.y, 2, 0, 2 * Math.PI);
         ctx.fill(circle);
         ctx.stroke(circle);
-        console.log("drew stuff");
     }
 }
 
