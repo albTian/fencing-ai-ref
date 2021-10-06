@@ -94,6 +94,7 @@ export default function Camera() {
         maxHeight: "100vh",
         overflow: "hidden",
         display: "flex",
+        flexDirection: "column",
         alignContent: "center",
       }}
     >
