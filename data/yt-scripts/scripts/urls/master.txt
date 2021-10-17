@@ -1,0 +1,9 @@
+budapest-2019-wc.txt
+cairo-2019-gp.txt
+moscow-2018-gp.txt
+budapest-2019-wch.txt
+warsaw-2019-wc.txt
+montreal-2020-gp.txt
+moscow-2019-gp.txt
+seoul-2019-gp.txt
+wuxi-2018-wch.txt
