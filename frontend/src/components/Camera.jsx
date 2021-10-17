@@ -108,7 +108,7 @@ export default function Camera() {
         height={videoConstraints.height}
         videoConstraints={videoConstraints}
         style={{
-          // visibility: "hidden",
+          visibility: "hidden",
         }}
       />
     </div>
