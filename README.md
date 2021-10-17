@@ -1,5 +1,5 @@
 # The Fencing AI Referee Project
-Welcome to the collection of parts that will make up the fencing AI referee. This main repo was created to centralize all the bits and peices of the fencing AI project over time. There are 4 folders:
+Welcome to the collection of parts that will make up the fencing AI referee. This main repo was created to centralize all the bits and pieces of the fencing AI project over time. There are 4 folders:
   
 # data
 Contains everything related to data collection and processing. **Huge thanks to Solto Douglas for the majority of the cutting and scripting.** The goal of this folder is to create a system to ingest a youtube link (playlist or video) of fencing footage and 
