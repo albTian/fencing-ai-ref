@@ -3,7 +3,7 @@ import time
 import download_vids
 import fast_clip_cutter
 import data_labeler
-import wrnch_AI_feeder
+# import wrnch_AI_feeder
 
 # INPUTS MUST BE PLAYLUST URL, THEN TOURNEY NAME
 pl_url = input("Paste playlist URL and press enter...")
@@ -22,7 +22,7 @@ data_labeler.main(tournament_name)
 
 print("Check that ../videos-labeled/{}-LABELED exists and is split into left, right, none, split and misc touches".format(tournament_name))
 input("Press Enter to run pose estimation after checking...")
-wrnch_AI_feeder.main(tournament_name)
+# wrnch_AI_feeder.main(tournament_name)
 # ^ COMMENT THIS OUT TO EXCLUDE POSE ESTIMATION ^
 
 print("Check that ../videos-wrnch-annotated/{}-WRNCH exists".format(tournament_name))

@@ -1,4 +1,4 @@
-# Fencing AI ref project
+# Fencing AI ref data processing
 Using computer vision, pose estimation, AI/ML to create a sabre ref. **Huge thanks to Shotlo Douglas** for the shotlo-scripts to download, cut and parse videos.
 
 ## How to collect data using the scripts
