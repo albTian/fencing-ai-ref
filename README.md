@@ -1,5 +1,6 @@
 # The Fencing AI Referee Project
-**Frontend hosted [here](https://fencing-ai-ref.vercel.app/)**
+**Frontend hosted [here](https://fencing-ai-ref.vercel.app/)**  
+
 Welcome to the collection of parts that will make up the fencing AI referee. This main repo was created to centralize all the bits and pieces of the fencing AI project over time. There are 4 folders:
   
 # data
@@ -8,7 +9,7 @@ Contains everything related to data collection and processing. **Huge thanks to 
 2. Cut into 1 touch long videos
 3. Classify videos into touches ex. left, split, right ...
 4. Run pose estimation on each video
-5. ... TBD
+5. ... TBD, potentially will need to create a system to store the vast amounts of video and pose data that comes with it ...
   
 # frontend
 Contains the frontend to the actual web app interface. Heavily based off the [tfjs demos.](https://github.com/tensorflow/tfjs-models/tree/master/pose-detection/demos) Goal of this folder is to
