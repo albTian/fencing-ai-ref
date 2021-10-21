@@ -1,5 +1,5 @@
 # The Fencing AI Referee Project
-**Frontend hosted at https://fencing-ai-frontend.vercel.app/**
+**Frontend hosted [here](https://fencing-ai-ref.vercel.app/)**
 Welcome to the collection of parts that will make up the fencing AI referee. This main repo was created to centralize all the bits and pieces of the fencing AI project over time. There are 4 folders:
   
 # data
