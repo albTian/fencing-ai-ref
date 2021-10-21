@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "@tensorflow/tfjs-core";
 import "@tensorflow/tfjs-backend-webgl";
 import "@tensorflow/tfjs-backend-wasm";
@@ -22,6 +22,7 @@ let drawer;
 export default function Camera() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     run();
@@ -34,6 +35,7 @@ export default function Camera() {
     await setupDetector();
     await renderPrediction();
     console.log("done loading");
+    setIsLoading(false);
   }
 
   function setup() {
@@ -95,6 +97,7 @@ export default function Camera() {
         overflow: "hidden",
       }}
     >
+      {isLoading && <p>loading camera and model ...</p>}
       <canvas
         ref={canvasRef}
         width={videoConstraints.width}
