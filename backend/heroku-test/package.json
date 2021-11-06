@@ -13,6 +13,7 @@
   "author": "Albert Tian",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1023.0",
     "express": "^4.17.1"
   }
 }
