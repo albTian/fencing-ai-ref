@@ -1,15 +1,18 @@
 [
     {
+        "id": 0,
         "name": "Albert",
         "weapon": "Sabre",
         "rating": "C17"
     },
     {
+        "id": 1,
         "name": "Cat",
         "weapon": "Epee",
         "rating": "B20"
     },
     {
+        "id": 2,
         "name": "Bobby",
         "weapon": "Foil",
         "rating": "E19"
