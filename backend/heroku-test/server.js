@@ -1,9 +1,9 @@
-const express = require('express')
-const app = express()
+const PORT = process.env.PORT || 3000;
+const express = require("express");
+const app = express();
 app.use(express.json());
 
 const players = require('./data.json')
-let port = process.env.PORT || 3000
 
 app.get('/', (req, res) => {
     res.send('Hello World')
@@ -29,13 +29,13 @@ app.post('/players', (req, res) => {
     }
 
     players.push(newPlayer)
-    res.send(newPlayer)
+    res.send(req.body)
 })
 
 app.get('/players', (req, res) => {
     res.send(players)
 })
 
-app.listen(port, () => {
-    console.log(`listening on http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`listening on http://localhost:${PORT}`);
 })
