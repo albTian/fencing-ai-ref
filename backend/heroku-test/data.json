@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Albert",
+        "weapon": "Sabre",
+        "rating": "C17"
+    },
+    {
+        "name": "Cat",
+        "weapon": "Epee",
+        "rating": "B20"
+    },
+    {
+        "name": "Bobby",
+        "weapon": "Foil",
+        "rating": "E19"
+    }
+]
