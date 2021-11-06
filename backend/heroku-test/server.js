@@ -19,11 +19,13 @@ app.get('/players/:id', (req, res) => {
 })
 
 app.post('/players', (req, res) => {
+    console.log(`req: ${req}`);
+    console.log(`res: ${res}`);
     const newPlayer = {
         id: players.length + 1,
-        name: req.body.name,
-        weapon: req.body.weapon,
-        rating: req.body.rating,
+        name: req.body.name + "fuck",
+        weapon: req.body.weapon + "??",
+        rating: req.body.rating + "lol",
     }
 
     players.push(newPlayer)
