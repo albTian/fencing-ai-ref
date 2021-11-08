@@ -1,5 +1,6 @@
 import React from "react";
 import Camera from "./components/Camera";
+import RequestTester from "./components/RequestTester";
 import { isChrome } from "react-device-detect";
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
         ) : (
           <p>Only chrome is supported for now ...</p>
         )}
+        <RequestTester />
       </header>
     </div>
   );

@@ -19,7 +19,7 @@ let webcam, detector;
 let canvas, ctx;
 let drawer;
 
-export default function Camera() {
+function Camera() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -117,3 +117,5 @@ export default function Camera() {
     </div>
   );
 }
+
+export default Camera

@@ -3,6 +3,12 @@
 
 Welcome to the collection of parts that will make up the fencing AI referee. This main repo was created to centralize all the bits and pieces of the fencing AI project over time. There are 4 folders:
   
+# backend
+Contains backend related experiments. This is the intermediate layer between the frontend and the data / database layer. Currently experimenting with Node.js, Express hosted on Heroku. Goal of this folder is
+1. Recieve REST requests from the frontend
+2. Process requests and run the **data** scripts
+3. Upload to databases (MongoDB, AWS S3)
+
 # data
 Contains everything related to data collection and processing. **Huge thanks to Solto Douglas for the majority of the cutting and scripting.** The goal of this folder is to create a system to ingest a youtube link (playlist or video) of fencing footage and 
 1. Download videos
