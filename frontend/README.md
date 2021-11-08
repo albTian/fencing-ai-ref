@@ -1,5 +1,4 @@
-# Fencing AI v2
-
+# Fencing AI v2 frontend
 This is the frontend to the fencing AI referee project by Albert Tian. The goal is to create an automatic sabre referee on the browser that can tell right of way consistently. Bootstrapped using [Create React App](https://github.com/facebook/create-react-app).
 
 # Technical Spec
