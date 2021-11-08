@@ -22,7 +22,7 @@ function RequestTester() {
       .catch((error) => {
         console.log(error);
       });
-  }, [instance]);
+  }, []);
 
   return <p>dpg</p>;
 }
