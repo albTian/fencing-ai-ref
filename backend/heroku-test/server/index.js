@@ -1,5 +1,6 @@
 const PORT = process.env.PORT || 3000;
 const express = require("express");
+const { spawn } = require('child_process');
 const app = express();
 
 // I HAVE DEFATED CORS
@@ -10,10 +11,27 @@ app.use(function (req, res, next) {
 });
 app.use(express.json());
 
-const players = require('./data.json')
+const players = require('../data.json')
 
 app.get('/', (req, res) => {
-    res.send('Hello World! I am changing')
+    // res.send('Hello World! I am changing')
+
+    // Python testing here
+    var dataToSend;
+    // spawn new child process to call the python script
+    const python = spawn('python', ['python/script2.py', 'aids', 'monkey']);
+    // collect data from script
+    python.stdout.on('data', data => {
+        console.log('Pipe data from python script ...');
+        dataToSend = data.toString();
+    });
+    // in close event we are sure that stream from child process is closed
+    python.on('close', (code) => {
+        console.log(`child process close all stdio with code ${code}`);
+        // send data to browser
+        res.send(dataToSend)
+    });
+    // Python ending
 })
 
 app.get('/players/:id', (req, res) => {
