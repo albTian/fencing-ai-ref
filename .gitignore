@@ -1,5 +1,3 @@
-# Not sure why subdirectory gitignore isn't working...
-
 # misc
 .DS_Store
 .env.local
