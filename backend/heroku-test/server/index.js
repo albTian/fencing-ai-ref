@@ -15,6 +15,7 @@ const players = require('../data.json')
 
 app.get('/', (req, res) => {
     // res.send('Hello World! I am changing')
+    console.log("home get request");
 
     // Python testing here
     var dataToSend;
