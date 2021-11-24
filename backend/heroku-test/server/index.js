@@ -22,6 +22,7 @@ const players = require('../data.json')
 
 app.get('/', (req, res) => {
     console.log(`Here's the console for the server`);
+    console.log(process.env);
     res.send('Hello World! This is the node.js server')
 })
 
@@ -74,6 +75,7 @@ app.get('/aws', (req, res) => {
     s3.listBuckets(function (err, data) {
         if (err) {
             console.log("Error", err);
+            res.send(err)
         } else {
             console.log("Success", data.Buckets);
             console.log(`First bucket: ${data.Buckets[0].Name} created at: ${data.Buckets[0].CreationDate}`);
