@@ -4,4 +4,4 @@ npm-debug.log
 /*.env
 package-lock.json
 yarn.lock
-/*__pycache__
+python/__pycache__
