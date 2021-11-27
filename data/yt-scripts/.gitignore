@@ -3,3 +3,5 @@ videos-cut
 videos-labeled
 videos-wrnch-annotated
 videos-wrnch-json
+scripts/__pycache__
+men.txt
